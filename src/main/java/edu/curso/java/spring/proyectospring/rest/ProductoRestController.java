@@ -48,7 +48,7 @@ public class ProductoRestController {
 		productoDTO.setPrecio(4500.0);
 		
 		if(id == 99) {
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		return ResponseEntity.ok(productoDTO);
 	}
@@ -56,7 +56,7 @@ public class ProductoRestController {
 	@PostMapping("/productos")
 	public ResponseEntity<ProductoDTO> altaDeNuevoProducto(@RequestBody ProductoDTO productoDTO) {
 
-		return new ResponseEntity(productoDTO, HttpStatus.CREATED);
+		return  ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
 	}
 	
 	@PutMapping("/productos/{id}")
@@ -66,7 +66,7 @@ public class ProductoRestController {
 	
 	@DeleteMapping("/productos/{id}")
 	public ResponseEntity<?> borrarProductoPorId(@PathVariable Long id) {
-		return new ResponseEntity(HttpStatus.NO_CONTENT);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 	
 	
