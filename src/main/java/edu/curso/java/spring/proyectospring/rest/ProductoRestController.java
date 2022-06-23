@@ -58,11 +58,15 @@ public class ProductoRestController {
 	
 	@PutMapping("/productos/{id}")
 	public void actualizarProductoPor(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
-		
+		Producto producto = productoService.buscarProductoPorId(id);
+		producto.setNombre(productoDTO.getNombre());
+		producto.setPrecio(productoDTO.getPrecio());
+		productoService.actualizarProducto(producto);
 	}
 	
 	@DeleteMapping("/productos/{id}")
 	public ResponseEntity<?> borrarProductoPorId(@PathVariable Long id) {
+		productoService.borrarProductoPorId(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 	

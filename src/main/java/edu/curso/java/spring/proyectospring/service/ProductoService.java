@@ -11,5 +11,9 @@ public interface ProductoService {
 	Producto buscarProductoPorId(Long id);
 
 	List<Producto> recuperarProductos();
+	
+	void borrarProductoPorId(Long id);
+	
+	void actualizarProducto(Producto producto);
 
 }

@@ -3,6 +3,7 @@ package edu.curso.java.spring.proyectospring.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,10 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+	
+	public ProductoServiceImpl() {
+		System.out.println("Creando un ProductoServiceImpl");
+	}
 	
 	@Override
 	public Long guardarNuevoProducto(Producto producto) {
@@ -32,6 +37,18 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> recuperarProductos() {
 		return productoRepository.findAll();
+	}
+
+	@Override
+	public void borrarProductoPorId(Long id) {
+		productoRepository.deleteById(id);
+	}
+
+	@Override
+	public void actualizarProducto(Producto producto) {
+		productoRepository.save(producto);
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
