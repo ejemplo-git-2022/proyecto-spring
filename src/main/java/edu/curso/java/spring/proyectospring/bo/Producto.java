@@ -1,20 +1,16 @@
-package edu.curso.java.spring.proyectospring.rest.dto;
+package edu.curso.java.spring.proyectospring.bo;
 
-import edu.curso.java.spring.proyectospring.bo.Producto;
+import javax.persistence.*;
 
-public class ProductoDTO {
+@Entity
+public class Producto {
 
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String nombre;
 	private Double precio;
 	
-	public ProductoDTO() { }
-	
-	public ProductoDTO(Producto producto) {
-		this.id = producto.getId();
-		this.nombre = producto.getNombre();
-		this.precio = producto.getPrecio();
-	}
 	public Long getId() {
 		return id;
 	}
@@ -33,5 +29,6 @@ public class ProductoDTO {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
+	
 	
 }

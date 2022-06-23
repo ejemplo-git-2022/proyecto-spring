@@ -3,6 +3,7 @@ package edu.curso.java.spring.proyectospring.rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,48 +16,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.curso.java.spring.proyectospring.bo.Producto;
 import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
+import edu.curso.java.spring.proyectospring.service.ProductoService;
 
 @RestController
 @RequestMapping("/api")
 public class ProductoRestController {
 
+	@Autowired
+	private ProductoService productoService;
+	
 	@GetMapping("/productos")
 	public List<ProductoDTO> recuperarTodosLosProducto() {
-		ProductoDTO productoDTO1 = new ProductoDTO();
-		productoDTO1.setId(1234L);
-		productoDTO1.setNombre("Ejemplo 1234");
-		productoDTO1.setPrecio(4500.0);
-		
-		ProductoDTO productoDTO2 = new ProductoDTO();
-		productoDTO2.setId(4423L);
-		productoDTO2.setNombre("Ejemplo 1234");
-		productoDTO2.setPrecio(4500.0);
-		
+		List<Producto> productos = productoService.recuperarProductos();
 		List<ProductoDTO> productosDTO = new ArrayList<ProductoDTO>();
-		productosDTO.add(productoDTO1);
-		productosDTO.add(productoDTO2);
+		for (Producto producto : productos) {
+			productosDTO.add(new ProductoDTO(producto));
+		}
+		
 		return productosDTO;
 	}
 
 	
 	@GetMapping("/productos/{id}")
 	public ResponseEntity<ProductoDTO> recuperarProductoPorId(@PathVariable Long id) {
-		ProductoDTO productoDTO = new ProductoDTO();
-		productoDTO.setId(1234L);
-		productoDTO.setNombre("Ejemplo 1234");
-		productoDTO.setPrecio(4500.0);
-		
-		if(id == 99) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
+		Producto producto = productoService.buscarProductoPorId(id);
+		ProductoDTO productoDTO = new ProductoDTO(producto);
 		return ResponseEntity.ok(productoDTO);
 	}
 	
 	@PostMapping("/productos")
 	public ResponseEntity<ProductoDTO> altaDeNuevoProducto(@RequestBody ProductoDTO productoDTO) {
-
-		return  ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
+		Producto producto = new Producto();
+		producto.setNombre(productoDTO.getNombre());
+		producto.setPrecio(productoDTO.getPrecio());
+		Long idGenerado = productoService.guardarNuevoProducto(producto);
+		productoDTO.setId(idGenerado);
+		return ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
 	}
 	
 	@PutMapping("/productos/{id}")
