@@ -51,7 +51,7 @@ public class ProductoRestController {
 		Producto producto = new Producto();
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());
-		Long idGenerado = productoService.guardarNuevoProducto(producto);
+		Long idGenerado = productoService.guardarNuevoProducto(producto, productoDTO.getCategoriaId());
 		productoDTO.setId(idGenerado);
 		return ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
 	}

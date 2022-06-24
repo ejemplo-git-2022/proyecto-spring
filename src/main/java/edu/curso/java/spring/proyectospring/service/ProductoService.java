@@ -7,7 +7,7 @@ import edu.curso.java.spring.proyectospring.bo.Producto;
 
 public interface ProductoService {
 
-	Long guardarNuevoProducto(Producto producto);
+	Long guardarNuevoProducto(Producto producto, Long idCategoria);
 
 	Producto buscarProductoPorId(Long id);
 

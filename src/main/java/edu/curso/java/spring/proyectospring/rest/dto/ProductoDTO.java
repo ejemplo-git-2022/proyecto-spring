@@ -7,13 +7,32 @@ public class ProductoDTO {
 	private Long id;
 	private String nombre;
 	private Double precio;
+	private Long categoriaId;
+	private String categoriaNombre;
 	
+	public String getCategoriaNombre() {
+		return categoriaNombre;
+	}
+
+	public void setCategoriaNombre(String categoriaNombre) {
+		this.categoriaNombre = categoriaNombre;
+	}
+
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
+	}
+
 	public ProductoDTO() { }
 	
 	public ProductoDTO(Producto producto) {
 		this.id = producto.getId();
 		this.nombre = producto.getNombre();
 		this.precio = producto.getPrecio();
+		this.categoriaNombre = producto.getCategoriaProducto().getNombre();
 	}
 	public Long getId() {
 		return id;

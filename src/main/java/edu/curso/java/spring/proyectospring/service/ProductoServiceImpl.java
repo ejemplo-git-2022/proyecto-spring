@@ -30,7 +30,9 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 	
 	@Override
-	public Long guardarNuevoProducto(Producto producto) {
+	public Long guardarNuevoProducto(Producto producto, Long categoriaId) {
+		CategoriaProducto categoriaProducto = categoriaProductoRepository.buscarCategoriaProductoPorId(categoriaId);
+		producto.setCategoriaProducto(categoriaProducto);
 		productoRepository.save(producto);
 		return producto.getId();
 	}
