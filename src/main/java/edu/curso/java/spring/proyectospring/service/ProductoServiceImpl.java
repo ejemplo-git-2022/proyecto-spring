@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.curso.java.spring.proyectospring.bo.Producto;
+import edu.curso.java.spring.proyectospring.repository.PersonaRepository;
 import edu.curso.java.spring.proyectospring.repository.ProductoRepository;
 import java.util.*;
 
@@ -17,6 +18,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 	
 	public ProductoServiceImpl() {
 		System.out.println("Creando un ProductoServiceImpl");
@@ -36,6 +40,8 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	@Override
 	public List<Producto> recuperarProductos() {
+		//System.out.println("Cantidad total de personas: " + personaRepository.contarPersonas());
+		
 		return productoRepository.findAll();
 	}
 
