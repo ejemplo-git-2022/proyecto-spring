@@ -32,7 +32,9 @@ public class ProductoDTO {
 		this.id = producto.getId();
 		this.nombre = producto.getNombre();
 		this.precio = producto.getPrecio();
-		this.categoriaNombre = producto.getCategoriaProducto().getNombre();
+		if(producto.getCategoriaProducto() != null) {
+			this.categoriaNombre = producto.getCategoriaProducto().getNombre();			
+		}
 	}
 	public Long getId() {
 		return id;
