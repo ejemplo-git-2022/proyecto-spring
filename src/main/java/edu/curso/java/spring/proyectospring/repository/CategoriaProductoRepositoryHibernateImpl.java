@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import edu.curso.java.spring.proyectospring.bo.CategoriaProducto;
 
+@Repository
 public class CategoriaProductoRepositoryHibernateImpl implements CategoriaProductoRepository {
 
 	@Autowired
