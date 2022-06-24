@@ -1,13 +1,13 @@
 package edu.curso.java.spring.proyectospring.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.curso.java.spring.proyectospring.bo.CategoriaProducto;
 import edu.curso.java.spring.proyectospring.bo.Producto;
+import edu.curso.java.spring.proyectospring.repository.CategoriaProductoRepository;
 import edu.curso.java.spring.proyectospring.repository.PersonaRepository;
 import edu.curso.java.spring.proyectospring.repository.ProductoRepository;
 import java.util.*;
@@ -21,6 +21,9 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	@Autowired
 	private PersonaRepository personaRepository;
+	
+	@Autowired
+	private CategoriaProductoRepository categoriaProductoRepository;
 	
 	public ProductoServiceImpl() {
 		System.out.println("Creando un ProductoServiceImpl");
@@ -55,6 +58,18 @@ public class ProductoServiceImpl implements ProductoService {
 		productoRepository.save(producto);
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<CategoriaProducto> recuperarCategoriasProducto() {
+		// TODO Auto-generated method stub
+		return categoriaProductoRepository.recuperarTodasLasCategoriasProducto();
+	}
+
+	@Override
+	public CategoriaProducto buscarCategoriaProductoPorId(Long id) {
+		// TODO Auto-generated method stub
+		return categoriaProductoRepository.buscarCategoriaProductoPorId(id);
 	}
 	
 }

@@ -2,6 +2,7 @@ package edu.curso.java.spring.proyectospring.service;
 
 import java.util.List;
 
+import edu.curso.java.spring.proyectospring.bo.CategoriaProducto;
 import edu.curso.java.spring.proyectospring.bo.Producto;
 
 public interface ProductoService {
@@ -15,5 +16,9 @@ public interface ProductoService {
 	void borrarProductoPorId(Long id);
 	
 	void actualizarProducto(Producto producto);
+	
+	List<CategoriaProducto> recuperarCategoriasProducto();
+	
+	CategoriaProducto buscarCategoriaProductoPorId(Long id);
 
 }
