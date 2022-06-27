@@ -1,11 +1,18 @@
 package edu.curso.java.spring.proyectospring.rest.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 import edu.curso.java.spring.proyectospring.bo.Producto;
 
 public class ProductoDTO {
 
 	private Long id;
+	
+	@NotBlank
 	private String nombre;
+	
+	@Positive
 	private Double precio;
 	private Long categoriaId;
 	private String categoriaNombre;

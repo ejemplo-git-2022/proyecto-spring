@@ -3,6 +3,8 @@ package edu.curso.java.spring.proyectospring.rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -94,7 +96,7 @@ public class ProductoRestController {
 	}
 	
 	@PostMapping("/productos")
-	public ResponseEntity<ProductoDTO> altaDeNuevoProducto(@RequestBody ProductoDTO productoDTO) {
+	public ResponseEntity<ProductoDTO> altaDeNuevoProducto(@Valid @RequestBody ProductoDTO productoDTO) {
 		Producto producto = new Producto();
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());
@@ -104,7 +106,7 @@ public class ProductoRestController {
 	}
 	
 	@PutMapping("/productos/{id}")
-	public void actualizarProductoPor(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
+	public void actualizarProductoPor(@PathVariable Long id, @Valid @RequestBody ProductoDTO productoDTO) {
 		Producto producto = productoService.buscarProductoPorId(id);
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());

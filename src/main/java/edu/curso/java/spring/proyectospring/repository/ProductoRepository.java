@@ -13,7 +13,6 @@ import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
 	
-	
 	@Query("select p from Producto as p where p.nombre like ?1%")
 	List<Producto> buscarProductos(String nombre);
 
@@ -22,5 +21,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
 	@Query("select p from Producto as p where p.categoriaProducto.id = ?1")
 	List<Producto> recuperarProductosPorCategoria(Long id);
+
+	//@Query(value = "select * from Producto where categoria_producto_id = ?1", nativeQuery = true)
+	//List<Producto> recuperarProductosPorCategoria2(Long id);
 
 }
