@@ -44,7 +44,13 @@ public class ProductoRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No podemos buscar productos con la categoria id: " + id);
 			//throw new ProductoException("No podemos buscar productos con la categoria id: " + id);
 		
-		return productoService.recuperarProductosPorCategoria(id);
+		List<Producto> productos = productoService.recuperarProductosPorCategoria(id);
+		List<ProductoDTO> productosDTO = new ArrayList<ProductoDTO>();
+		for (Producto producto : productos) {
+			productosDTO.add(new ProductoDTO(producto));
+		}
+		
+		return productosDTO;
 	}
 
 	@GetMapping("/productos/buscar")

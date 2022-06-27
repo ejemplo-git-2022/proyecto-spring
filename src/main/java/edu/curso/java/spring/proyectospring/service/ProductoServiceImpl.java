@@ -10,6 +10,8 @@ import edu.curso.java.spring.proyectospring.bo.Producto;
 import edu.curso.java.spring.proyectospring.repository.CategoriaProductoRepository;
 import edu.curso.java.spring.proyectospring.repository.PersonaRepository;
 import edu.curso.java.spring.proyectospring.repository.ProductoRepository;
+import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
+
 import java.util.*;
 
 @Service
@@ -84,6 +86,12 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<Producto> buscarProductos(String nombre, Double precio) {
 		// TODO Auto-generated method stub
 		return productoRepository.buscarProductos(nombre, precio);
+	}
+
+	@Override
+	public List<Producto> recuperarProductosPorCategoria(Long id) {
+		// TODO Auto-generated method stub
+		return productoRepository.recuperarProductosPorCategoria(id);
 	}
 	
 }

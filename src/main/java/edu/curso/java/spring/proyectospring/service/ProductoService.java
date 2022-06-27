@@ -27,6 +27,6 @@ public interface ProductoService {
 	
 	CategoriaProducto buscarCategoriaProductoPorId(Long id);
 
-	List<ProductoDTO> recuperarProductosPorCategoria(Long id);
+	List<Producto> recuperarProductosPorCategoria(Long id);
 
 }
