@@ -73,5 +73,17 @@ public class ProductoServiceImpl implements ProductoService {
 		// TODO Auto-generated method stub
 		return categoriaProductoRepository.buscarCategoriaProductoPorId(id);
 	}
+
+	@Override
+	public List<Producto> buscarProductos(String nombre) {
+		// TODO Auto-generated method stub
+		return productoRepository.buscarProductos(nombre);
+	}
+
+	@Override
+	public List<Producto> buscarProductos(String nombre, Double precio) {
+		// TODO Auto-generated method stub
+		return productoRepository.buscarProductos(nombre, precio);
+	}
 	
 }

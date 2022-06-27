@@ -22,6 +22,8 @@ import edu.curso.java.spring.proyectospring.rest.dto.CategoriaProductoDTO;
 import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
 import edu.curso.java.spring.proyectospring.service.ProductoService;
 
+// https://www.ibm.com.ar/v1/api/
+
 @RestController
 @RequestMapping("/api")
 public class CategoriaProductoRestController {
