@@ -30,7 +30,7 @@ public class HolaMundoController {
 		return "holamundo";
 	}
 	
-	@GetMapping("/saludar3")
+	@GetMapping("/saludar3") //    /holamundo/saludar3?texto=maria
 	public String saludar3(Model model, @RequestParam String texto) {
 		log.info("ejecutando saludar3...");
 		model.addAttribute("texto", texto);
