@@ -24,7 +24,7 @@
 					<span style="color: green;">${p.precio}</span>
 				</c:if>
 			</td>
-			<td><a href="/productos/${p.id}">Ver</a></td>
+			<td><a href="/productos/${p.id}">Ver</a>&nbsp;<a href="/productos/borrar/${p.id}">Borrar</a></td>
 		</tr>
 	</c:forEach>
 </table>
