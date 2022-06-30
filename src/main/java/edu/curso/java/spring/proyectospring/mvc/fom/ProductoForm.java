@@ -1,8 +1,11 @@
 package edu.curso.java.spring.proyectospring.mvc.fom;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+
+import org.springframework.lang.NonNull;
 
 public class ProductoForm {
 	
@@ -12,6 +15,7 @@ public class ProductoForm {
 	@NotBlank
 	private String nombre;
 
+	@NotNull
 	@Positive
 	private Double precio;
 	
