@@ -2,9 +2,12 @@ package edu.curso.java.spring.proyectospring.mvc;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import edu.curso.java.spring.proyectospring.bo.CategoriaProducto;
@@ -41,8 +44,7 @@ public class ProductosController {
 
 	@GetMapping("/nuevo")
 	public String nuevo(Model model) {
-		List<CategoriaProducto> categorias = productoService.recuperarCategoriasProducto();
-		model.addAttribute("categorias", categorias);
+		this.cargarCategorias(model);
 		model.addAttribute("productoForm", new ProductoForm());
 		return "/productos/form";
 	}
@@ -50,7 +52,6 @@ public class ProductosController {
 	@GetMapping("/{id}/editar")
 	public String editar(Model model, @PathVariable Long id) {
 		Producto producto = productoService.buscarProductoPorId(id);
-		List<CategoriaProducto> categorias = productoService.recuperarCategoriasProducto();
 		
 		ProductoForm productoForm = new ProductoForm();
 		productoForm.setId(producto.getId());
@@ -60,16 +61,35 @@ public class ProductosController {
 		if(producto.getCategoriaProducto() != null)
 			productoForm.setCategoriaId(producto.getCategoriaProducto().getId());
 		
-		model.addAttribute("categorias", categorias);
+		this.cargarCategorias(model);
 		model.addAttribute("productoForm", productoForm);
 		return "/productos/form";
 	}
 
+	private void cargarCategorias(Model model) {
+		List<CategoriaProducto> categorias = productoService.recuperarCategoriasProducto();
+		model.addAttribute("categorias", categorias);
+	}
+
 	
 	@PostMapping("/guardar")
-	public String guardar(@ModelAttribute(name = "productoForm") ProductoForm productoForm, Model model) {
+	public String guardar(@Valid @ModelAttribute(name = "productoForm") ProductoForm productoForm, Model model, BindingResult bindingResult) {
 
-		Producto producto = new Producto();
+		if(bindingResult.hasErrors()) {
+			this.cargarCategorias(model);
+			model.addAttribute("productoForm", productoForm);
+			return "form";
+		}
+		
+		Producto producto = null;
+		Long idProducto = productoForm.getId();
+		
+		if(idProducto == null) {
+			producto = new Producto();
+		} else {
+			producto = productoService.buscarProductoPorId(idProducto);
+		}
+		
 		producto.setNombre(productoForm.getNombre());
 		producto.setPrecio(productoForm.getPrecio());
 		productoService.guardarNuevoProducto(producto, productoForm.getCategoriaId());
