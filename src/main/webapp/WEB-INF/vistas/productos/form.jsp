@@ -10,12 +10,13 @@
 <body>
 
 
-<form:form>
-	<form:input path="id" readonly="true"/>
-	<form:input path="nombre"/>
-	<form:input path="precio"/>
-	<button type="submit">Enviar datos</button>
-</form:form>
+	<form:form method="post" action="guardar" modelAttribute="productoForm">
+		<form:input path="id" readonly="true"/>
+		<form:input path="nombre"/>
+		<form:input path="precio"/>
+		<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id"  />
+		<button type="submit">Enviar datos</button>
+	</form:form>
 
 </body>
 </html>
