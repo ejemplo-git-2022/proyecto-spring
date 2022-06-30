@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import edu.curso.java.spring.proyectospring.service.ProductoService;
 @Controller
 @RequestMapping("/productos")
 public class ProductosController {
+
+	private static  Logger log = LoggerFactory.getLogger(ProductosController.class);
 
 	@Autowired
 	private ProductoService productoService;
@@ -73,12 +77,14 @@ public class ProductosController {
 
 	
 	@PostMapping("/guardar")
-	public String guardar(@Valid @ModelAttribute(name = "productoForm") ProductoForm productoForm, Model model, BindingResult bindingResult) {
+	public String guardar(@Valid @ModelAttribute(name = "productoForm") ProductoForm productoForm, BindingResult bindingResult, Model model) {
 
+		log.info("Ejecutando el guardar: " + bindingResult.hasErrors());
+		
 		if(bindingResult.hasErrors()) {
 			this.cargarCategorias(model);
 			model.addAttribute("productoForm", productoForm);
-			return "form";
+			return "/productos/form";
 		}
 		
 		Producto producto = null;
