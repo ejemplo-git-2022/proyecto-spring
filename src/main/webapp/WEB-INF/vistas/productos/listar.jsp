@@ -4,9 +4,17 @@
 
 <jsp:include page="/WEB-INF/vistas/template_superior.jsp"></jsp:include>
 
-<h1>Listado de personas</h1>
+<h1>Listado de productos</h1>
 
-<table>
+<table class="table table-striped table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Precio</th>
+			<th></th>
+		</tr>
+	</thead>
 	<c:forEach items="${productos}" var="p">
 		<tr>
 			<td>${p.id}</td>
@@ -19,7 +27,10 @@
 					<span style="color: green;">${p.precio}</span>
 				</c:if>
 			</td>
-			<td><a href="/productos/${p.id}">Ver</a>&nbsp;<a href="/productos/${p.id}/editar">Editar</a>&nbsp;<a href="/productos/${p.id}/borrar">Borrar</a></td>
+			<td>
+				<a href="/productos/${p.id}" class="btn btn-primary">Ver</a>&nbsp;
+				<a href="/productos/${p.id}/editar" class="btn btn-success">Editar</a>&nbsp;
+				<a href="/productos/${p.id}/borrar" class="btn btn-danger">Borrar</a></td>
 		</tr>
 	</c:forEach>
 </table>
