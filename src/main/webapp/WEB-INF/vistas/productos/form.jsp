@@ -4,14 +4,35 @@
 
 <jsp:include page="/WEB-INF/vistas/template_superior.jsp"></jsp:include>
 
+	<h1>Formulario de producto</h1>
+
 	<form:form method="post" action="/productos/guardar" modelAttribute="productoForm">
-		<form:input path="id" readonly="true"/>
-		<form:input path="nombre"/>
-		<form:errors path="nombre"/>
-		<form:input path="precio"/>
-		<form:errors path="precio"/>
-		<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id"  />
-		<button type="submit">Enviar datos</button>
+
+		<div class="form-group">
+			<label>Id</label>
+			<form:input path="id" readonly="true" cssClass="form-control"/>
+		</div>
+
+
+		<div class="form-group">
+			<label>Nombre</label>
+			<form:input path="nombre" cssClass="form-control" />
+			<form:errors path="nombre"/>
+		</div>
+
+		<div class="form-group">
+			<label>Precio</label>
+			<form:input path="precio" cssClass="form-control" />
+			<form:errors path="precio"/>
+		</div>
+
+		<div class="form-group">
+			<label>Categoria</label>
+			<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id" cssClass="form-control" />
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Enviar datos</button>
 	</form:form>
 
 <jsp:include page="/WEB-INF/vistas/template_inferior.jsp"></jsp:include>
