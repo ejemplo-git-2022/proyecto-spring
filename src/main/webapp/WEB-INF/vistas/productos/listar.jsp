@@ -8,6 +8,20 @@
 
 <h1>Listado de productos</h1>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.btn-borrar').on('click', function(event) {
+			event.preventDefault();
+			var hrefOriginal = $(this).attr('href');
+			bootbox.confirm("Borramos el producto?", function(result){ 
+				if(result) {
+					window.location = hrefOriginal;
+				}
+			});
+			
+		});
+	});	
+</script>
 <table class="table table-striped table-bordered">
 	<thead class="thead-dark">
 		<tr>
@@ -32,7 +46,7 @@
 			<td>
 				<a href="/productos/${p.id}" class="btn btn-primary">Ver</a>&nbsp;
 				<a href="/productos/${p.id}/editar" class="btn btn-success">Editar</a>&nbsp;
-				<a href="/productos/${p.id}/borrar" class="btn btn-danger">Borrar</a></td>
+				<a href="/productos/${p.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a></td>
 		</tr>
 	</c:forEach>
 </table>
