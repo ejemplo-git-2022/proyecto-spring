@@ -18,7 +18,7 @@
 	
 	<style type="text/css">
 		body {
-			padding-top: 60px;
+			padding-top: 80px;
 		}
 	</style>
 </head>
