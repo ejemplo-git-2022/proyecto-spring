@@ -6,6 +6,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('#select-categorias').select2();
 			$('#form-producto').validate();
 		});
 	</script>
@@ -34,7 +35,7 @@
 
 		<div class="form-group">
 			<label>Categoria</label>
-			<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id" cssClass="form-control" />
+			<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id" cssClass="form-control" id="select-categorias" />
 		</div>
 
 

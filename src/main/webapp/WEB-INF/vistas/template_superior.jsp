@@ -9,12 +9,14 @@
 	<title>Ejemplo spring</title>
 	
 	<script type="text/javascript" src="<c:url value="/js/jquery-3.6.0.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/js/jquery-3.6.0.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/bootstrap.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/bootbox.all.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/jquery.validate.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/js/messages_es_AR.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/js/select2.min.js"/>"></script>
+	
 	<link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet" >
+	<link href="<c:url value="/css/select2.min.css"/>" rel="stylesheet" >
 	<link href="<c:url value="/css/general.css"/>" rel="stylesheet" >
 </head>
 <body>
