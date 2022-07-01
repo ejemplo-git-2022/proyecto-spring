@@ -17,13 +17,13 @@
 		<div class="form-group">
 			<label>Nombre</label>
 			<form:input path="nombre" cssClass="form-control" />
-			<form:errors path="nombre"/>
+			<form:errors path="nombre" cssClass="error"/>
 		</div>
 
 		<div class="form-group">
 			<label>Precio</label>
 			<form:input path="precio" cssClass="form-control" />
-			<form:errors path="precio"/>
+			<form:errors path="precio" cssClass="error"/>
 		</div>
 
 		<div class="form-group">
