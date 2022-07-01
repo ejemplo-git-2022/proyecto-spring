@@ -18,6 +18,39 @@
 	<link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet" >
 	<link href="<c:url value="/css/select2.min.css"/>" rel="stylesheet" >
 	<link href="<c:url value="/css/general.css"/>" rel="stylesheet" >
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#select-autocomplete-productos').select2({ 
+				width: '300px',
+				placeholder: 'Buscador ajax',
+				minimumInputLength: 2,
+				ajax: {
+				    url: '/api/productos/buscar',
+				    data: function (params) {
+				        var query = {
+				          nombre: params.term
+				        };
+				        return query;
+				    },
+				    processResults: function (data) {
+				        var nuevosDatos = [];
+				    	
+				        for(var producto of data) {
+				        	nuevosDatos.push({ id: producto.id, text: producto.nombre + ' ' + producto.precio });
+				        }
+				        
+				    	return {
+				          results: nuevosDatos
+				        };
+				    },
+				    dataType: 'json'
+				}
+			}).on('select2:select', function(event) {
+				window.location = '/productos/' + event.params.data.id;
+			});
+		});
+	</script>
 </head>
 <body>
 
@@ -38,8 +71,7 @@
 	        </li>
 	      </ul>
 	      <form class="form-inline mt-2 mt-md-0">
-	        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-	        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+	      	<select id="select-autocomplete-productos"></select>
 	      </form>
 	    </div>
 	  </nav>
