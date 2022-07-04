@@ -19,7 +19,15 @@ public class ProductoForm {
 	@Positive
 	private Double precio;
 	
+	private Long stockActual;
 	
+	
+	public Long getStockActual() {
+		return stockActual;
+	}
+	public void setStockActual(Long stockActual) {
+		this.stockActual = stockActual;
+	}
 	public Long getId() {
 		return id;
 	}

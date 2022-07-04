@@ -34,6 +34,12 @@
 		</div>
 
 		<div class="form-group">
+			<label>Stock actual</label>
+			<form:input path="stockActual" cssClass="form-control required number" />
+			<form:errors path="stockActual" cssClass="error"/>
+		</div>
+
+		<div class="form-group">
 			<label>Categoria</label>
 			<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id" cssClass="form-control" id="select-categorias" />
 		</div>

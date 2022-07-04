@@ -102,8 +102,16 @@ public class ProductoRestController {
 		Producto producto = new Producto();
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());
-		Long idGenerado = productoService.guardarNuevoProducto(producto, productoDTO.getCategoriaId());
-		productoDTO.setId(idGenerado);
+		producto.setStockActual(productoDTO.getStockActual());
+		Long idGenerado;
+		try {
+			idGenerado = productoService.guardarNuevoProducto(producto, productoDTO.getCategoriaId());
+			productoDTO.setId(idGenerado);
+
+		} catch (ProductoException e) {
+			log.error("Error al dar de alta nuevo producto", e);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(productoDTO);
 	}
 	
@@ -112,6 +120,7 @@ public class ProductoRestController {
 		Producto producto = productoService.buscarProductoPorId(id);
 		producto.setNombre(productoDTO.getNombre());
 		producto.setPrecio(productoDTO.getPrecio());
+		producto.setStockActual(productoDTO.getStockActual());
 		productoService.actualizarProducto(producto);
 	}
 	

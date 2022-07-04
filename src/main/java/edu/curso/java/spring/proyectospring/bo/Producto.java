@@ -10,6 +10,15 @@ public class Producto {
 	private Long id;
 	private String nombre;
 	private Double precio;
+	private Long stockActual;
+	
+	public Long getStockActual() {
+		return stockActual;
+	}
+
+	public void setStockActual(Long stockActual) {
+		this.stockActual = stockActual;
+	}
 	
 	@ManyToOne
 	private CategoriaProducto categoriaProducto;

@@ -15,7 +15,7 @@ import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
 import java.util.*;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
@@ -32,10 +32,14 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 	
 	@Override
-	public Long guardarNuevoProducto(Producto producto, Long categoriaId) {
+	public Long guardarNuevoProducto(Producto producto, Long categoriaId) throws ProductoException {
 		CategoriaProducto categoriaProducto = categoriaProductoRepository.buscarCategoriaProductoPorId(categoriaId);
 		producto.setCategoriaProducto(categoriaProducto);
 		productoRepository.save(producto);
+	
+		if(producto.getStockActual() == 0)
+			throw new ProductoException("No se puede guardar un producto con stock en 0");
+	
 		return producto.getId();
 	}
 	

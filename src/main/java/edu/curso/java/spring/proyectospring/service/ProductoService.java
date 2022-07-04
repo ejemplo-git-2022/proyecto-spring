@@ -9,7 +9,7 @@ import edu.curso.java.spring.proyectospring.rest.dto.ProductoDTO;
 
 public interface ProductoService {
 
-	Long guardarNuevoProducto(Producto producto, Long idCategoria);
+	Long guardarNuevoProducto(Producto producto, Long idCategoria) throws ProductoException;
 
 	Producto buscarProductoPorId(Long id);
 

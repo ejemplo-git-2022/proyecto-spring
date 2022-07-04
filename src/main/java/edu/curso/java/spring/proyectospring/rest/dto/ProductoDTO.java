@@ -16,7 +16,17 @@ public class ProductoDTO {
 	private Double precio;
 	private Long categoriaId;
 	private String categoriaNombre;
+	private Long stockActual;
 	
+	
+	public Long getStockActual() {
+		return stockActual;
+	}
+
+	public void setStockActual(Long stockActual) {
+		this.stockActual = stockActual;
+	}
+
 	public String getCategoriaNombre() {
 		return categoriaNombre;
 	}

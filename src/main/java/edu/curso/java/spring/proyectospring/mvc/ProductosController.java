@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import edu.curso.java.spring.proyectospring.bo.CategoriaProducto;
 import edu.curso.java.spring.proyectospring.bo.Producto;
 import edu.curso.java.spring.proyectospring.mvc.fom.ProductoForm;
+import edu.curso.java.spring.proyectospring.service.ProductoException;
 import edu.curso.java.spring.proyectospring.service.ProductoService;
 
 @Controller
@@ -98,7 +99,20 @@ public class ProductosController {
 		
 		producto.setNombre(productoForm.getNombre());
 		producto.setPrecio(productoForm.getPrecio());
-		productoService.guardarNuevoProducto(producto, productoForm.getCategoriaId());
+		producto.setStockActual(productoForm.getStockActual());
+
+		if(idProducto == null) {
+			try {
+				productoService.guardarNuevoProducto(producto, productoForm.getCategoriaId());
+			} catch (ProductoException e) {
+				log.error("Error al gurdar un nuevo producto", e.getMessage());
+				return "redirect:/error";
+			}
+
+		} else {
+			productoService.actualizarProducto(producto);
+		}
+
 		return "redirect:/productos";
 	}
 	

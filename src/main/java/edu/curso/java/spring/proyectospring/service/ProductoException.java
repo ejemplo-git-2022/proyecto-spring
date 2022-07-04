@@ -1,6 +1,6 @@
 package edu.curso.java.spring.proyectospring.service;
 
-public class ProductoException extends RuntimeException {
+public class ProductoException extends Exception {
 
 	public ProductoException() {
 		super();
