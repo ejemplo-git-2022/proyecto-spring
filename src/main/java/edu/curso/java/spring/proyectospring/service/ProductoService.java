@@ -28,5 +28,7 @@ public interface ProductoService {
 	CategoriaProducto buscarCategoriaProductoPorId(Long id);
 
 	List<Producto> recuperarProductosPorCategoria(Long id);
+	
+	void enviarCorreoDeAltaDeProducto(String destinatario, String titulo, String mensaje);
 
 }

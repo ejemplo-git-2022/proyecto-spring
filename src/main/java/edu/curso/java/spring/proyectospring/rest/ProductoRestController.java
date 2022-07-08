@@ -105,6 +105,7 @@ public class ProductoRestController {
 		producto.setStockActual(productoDTO.getStockActual());
 		Long idGenerado;
 		try {
+			productoService.enviarCorreoDeAltaDeProducto("pepe@hotmail.com", "Titulo1", "Ejemplo mensaje");
 			idGenerado = productoService.guardarNuevoProducto(producto, productoDTO.getCategoriaId());
 			productoDTO.setId(idGenerado);
 
