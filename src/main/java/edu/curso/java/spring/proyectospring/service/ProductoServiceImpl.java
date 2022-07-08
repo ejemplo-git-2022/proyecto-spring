@@ -22,8 +22,7 @@ import java.util.*;
 @Transactional(rollbackFor = Exception.class)
 public class ProductoServiceImpl implements ProductoService {
 
-    @Autowired
-    private JavaMailSender emailSender;
+ 
     
 	@Autowired
 	private ProductoRepository productoRepository;
@@ -33,6 +32,9 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	@Autowired
 	private CategoriaProductoRepository categoriaProductoRepository;
+	
+	@Autowired
+	private EnviadorDeEmails enviadorDeEmails;
 	
 	public ProductoServiceImpl() {
 		System.out.println("Creando un ProductoServiceImpl");
@@ -47,6 +49,8 @@ public class ProductoServiceImpl implements ProductoService {
 		if(producto.getStockActual() == 0)
 			throw new ProductoException("No se puede guardar un producto con stock en 0");
 	
+		enviadorDeEmails.enviarCorreoDeAltaDeProducto("pepe@hotmail.com", "Titulo1", "Ejemplo mensaje");
+
 		return producto.getId();
 	}
 	
@@ -106,21 +110,6 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 	
 	
-	@Async
-	@Override
-	public void enviarCorreoDeAltaDeProducto(String destinatario, String titulo, String mensaje) {
-
-        SimpleMailMessage message = new SimpleMailMessage(); 
-        message.setFrom("claudio.zamoszczyk@gmail.com");
-        message.setTo(destinatario);
-        message.setSubject(titulo);
-        message.setText(mensaje);
-        
-        emailSender.send(message);
-		
-		System.out.println("Listo termino el envio...");
-		
-	}
 	
 	
 	

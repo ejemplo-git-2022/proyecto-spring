@@ -29,6 +29,5 @@ public interface ProductoService {
 
 	List<Producto> recuperarProductosPorCategoria(Long id);
 	
-	void enviarCorreoDeAltaDeProducto(String destinatario, String titulo, String mensaje);
 
 }
