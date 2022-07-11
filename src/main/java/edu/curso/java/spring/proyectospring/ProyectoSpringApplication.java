@@ -3,9 +3,11 @@ package edu.curso.java.spring.proyectospring;
 import java.util.concurrent.Executor;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -16,6 +18,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @SpringBootApplication
 @EnableAsync
 @EnableScheduling
+@EnableCaching
 public class ProyectoSpringApplication extends SpringBootServletInitializer  {
 
     @Override

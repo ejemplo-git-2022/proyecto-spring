@@ -1,11 +1,13 @@
 package edu.curso.java.spring.proyectospring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +43,7 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public Long guardarNuevoProducto(Producto producto, Long categoriaId) throws ProductoException {
 		CategoriaProducto categoriaProducto = categoriaProductoRepository.buscarCategoriaProductoPorId(categoriaId);
 		producto.setCategoriaProducto(categoriaProducto);
@@ -80,11 +83,13 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
+	@Cacheable("categorias")
 	public List<CategoriaProducto> recuperarCategoriasProducto() {
 		// TODO Auto-generated method stub
 		return categoriaProductoRepository.recuperarTodasLasCategoriasProducto();
 	}
 
+	@Cacheable("categoriaPorId")
 	@Override
 	public CategoriaProducto buscarCategoriaProductoPorId(Long id) {
 		// TODO Auto-generated method stub
