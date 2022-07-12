@@ -1,5 +1,7 @@
 package edu.curso.java.spring.proyectospring.bo;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +13,16 @@ public class Producto {
 	private String nombre;
 	private Double precio;
 	private Long stockActual;
+	private Date fechaAlta;
 	
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
 	public Long getStockActual() {
 		return stockActual;
 	}

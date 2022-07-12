@@ -47,6 +47,10 @@ public class ProductoServiceImpl implements ProductoService {
 	public Long guardarNuevoProducto(Producto producto, Long categoriaId) throws ProductoException {
 		CategoriaProducto categoriaProducto = categoriaProductoRepository.buscarCategoriaProductoPorId(categoriaId);
 		producto.setCategoriaProducto(categoriaProducto);
+		
+		if(producto.getFechaAlta() == null)
+			producto.setFechaAlta(new Date());
+		
 		productoRepository.save(producto);
 	
 		if(producto.getStockActual() == 0)

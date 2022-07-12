@@ -1,7 +1,12 @@
 package edu.curso.java.spring.proyectospring.rest.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import edu.curso.java.spring.proyectospring.bo.Producto;
 
@@ -18,7 +23,17 @@ public class ProductoDTO {
 	private String categoriaNombre;
 	private Long stockActual;
 	
+	//@JsonFormat(shape = Shape.NUMBER, pattern="s")
+	private Date fechaAlta;
 	
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
 	public Long getStockActual() {
 		return stockActual;
 	}
@@ -52,6 +67,7 @@ public class ProductoDTO {
 		if(producto.getCategoriaProducto() != null) {
 			this.categoriaNombre = producto.getCategoriaProducto().getNombre();			
 		}
+		this.fechaAlta = producto.getFechaAlta();
 	}
 	public Long getId() {
 		return id;
