@@ -13,7 +13,7 @@
 
 	<h1>Formulario de producto</h1>
 
-	<form:form method="post" action="/productos/guardar" modelAttribute="productoForm" id="form-producto">
+	<form:form method="post" action="/productos/guardar" modelAttribute="productoForm" id="form-producto" enctype="multipart/form-data">
 
 		<div class="form-group">
 			<label>Id</label>
@@ -43,7 +43,13 @@
 			<label>Categoria</label>
 			<form:select path="categoriaId" items="${categorias}" itemLabel="nombre" itemValue="id" cssClass="form-control" id="select-categorias" />
 		</div>
+		
 
+		<div class="form-group">
+			<label>Foto producto</label>
+			<input type="file" name="foto" class="form-control">
+		</div>
+		
 
 		<button type="submit" class="btn btn-primary">Enviar datos</button>
 	</form:form>

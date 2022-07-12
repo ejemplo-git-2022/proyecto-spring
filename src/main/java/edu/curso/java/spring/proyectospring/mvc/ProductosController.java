@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import edu.curso.java.spring.proyectospring.bo.Producto;
 import edu.curso.java.spring.proyectospring.mvc.fom.ProductoForm;
 import edu.curso.java.spring.proyectospring.service.ProductoException;
 import edu.curso.java.spring.proyectospring.service.ProductoService;
+import java.io.*;
 
 @Controller
 @RequestMapping("/productos")
@@ -101,6 +103,10 @@ public class ProductosController {
 		producto.setPrecio(productoForm.getPrecio());
 		producto.setStockActual(productoForm.getStockActual());
 
+		
+		System.out.println(productoForm.getFoto().getOriginalFilename() + " " + productoForm.getFoto().getSize());
+		
+		
 		if(idProducto == null) {
 			try {
 				productoService.guardarNuevoProducto(producto, productoForm.getCategoriaId());
@@ -112,8 +118,41 @@ public class ProductosController {
 		} else {
 			productoService.actualizarProducto(producto);
 		}
+		
+		
+		File archivoImagen = new File("C:/Users/Claudio/imagenes-tmp/foto-" + producto.getId() + ".jpg");
+
+		try(FileOutputStream out = new FileOutputStream(archivoImagen)) {
+			out.write(productoForm.getFoto().getBytes());
+			
+		} catch (FileNotFoundException e) {
+			log.error("Archivo no encontrado", e);
+		} catch (IOException e) {
+			log.error("Error al guardar el archivo", e);
+		}
 
 		return "redirect:/productos";
+	}
+	
+	
+	@GetMapping(value = "/recuperar-foto/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody byte[] recuperarFotoProducto(@PathVariable Long id) {
+		
+		Producto producto = productoService.buscarProductoPorId(id);
+
+		if(producto != null) {
+			File archivoImagen = new File("C:/Users/Claudio/imagenes-tmp/foto-" + producto.getId() + ".jpg");
+			if(archivoImagen.exists()) {
+				try(FileInputStream in = new FileInputStream(archivoImagen)) {
+					return in.readAllBytes();					
+				} catch (FileNotFoundException e) {
+					log.error("Archivo no encontrado", e);
+				} catch (IOException e) {
+					log.error("Error al leer el archivo", e);
+				}
+			}
+		}
+		return null;
 	}
 	
 }

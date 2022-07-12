@@ -6,6 +6,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.springframework.lang.NonNull;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductoForm {
 	
@@ -21,7 +22,15 @@ public class ProductoForm {
 	
 	private Long stockActual;
 	
+	private MultipartFile foto;
 	
+	
+	public MultipartFile getFoto() {
+		return foto;
+	}
+	public void setFoto(MultipartFile foto) {
+		this.foto = foto;
+	}
 	public Long getStockActual() {
 		return stockActual;
 	}

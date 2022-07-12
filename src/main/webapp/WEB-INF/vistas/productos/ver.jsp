@@ -16,6 +16,7 @@
     <c:if test="${not empty producto.categoriaProducto}">
 	    <p class="card-text">Categoria: <c:out value="${producto.categoriaProducto.nombre}" default="Sin categoria" /></p>
  	</c:if>
+ 	<img src="/productos/recuperar-foto/${producto.id}">
   </div>
 </div>
 
