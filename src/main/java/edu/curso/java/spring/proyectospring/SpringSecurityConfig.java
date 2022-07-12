@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -36,15 +37,20 @@ public class SpringSecurityConfig {
 
 		http.authorizeHttpRequests()
 			.antMatchers("/api/**").authenticated()
+			.antMatchers("/productos/**").authenticated()
 			.antMatchers("/**").permitAll().and()
-			.httpBasic().and().csrf().disable();
+			.formLogin(form -> {
+				form.loginPage("/login");
+				form.loginProcessingUrl("/validarusuario");
+				form.failureUrl("/login?error=true");
+			}).httpBasic().and().csrf().disable();
 
 		return http.build();
 	}
 
-	/*@Bean
+	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
-	}*/
+	}
 
 }

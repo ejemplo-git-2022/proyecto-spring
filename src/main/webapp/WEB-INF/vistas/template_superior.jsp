@@ -79,4 +79,5 @@
 
 
 	<div class="container">
+		<div>${texto}</div>
 	<!-- INICIO CONTENIDO -->

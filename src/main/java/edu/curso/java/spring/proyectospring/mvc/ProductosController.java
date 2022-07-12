@@ -1,7 +1,10 @@
 package edu.curso.java.spring.proyectospring.mvc;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -43,7 +46,11 @@ public class ProductosController {
 	}
 
 	@GetMapping
-	public String listar(Model model) {
+	public String listar(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		log.info("Mi session ID: " + session.getId());
+		//session.setAttribute("texto", "Juan " + new Date());
+		String texto = (String) session.getAttribute("texto");
 		List<Producto> productos = productoService.recuperarProductos();
 		model.addAttribute("productos", productos);
 		return "/productos/listar";
