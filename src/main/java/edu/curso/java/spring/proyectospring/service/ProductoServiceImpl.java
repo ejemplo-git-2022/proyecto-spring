@@ -117,6 +117,12 @@ public class ProductoServiceImpl implements ProductoService {
 		// TODO Auto-generated method stub
 		return productoRepository.recuperarProductosPorCategoria(id);
 	}
+
+	@Override
+	public Long guardarNuevaCategoria(CategoriaProducto categoriaProducto) {
+		Long idGenerado = categoriaProductoRepository.guardarNuevaCategoria(categoriaProducto);
+		return idGenerado;
+	}
 	
 	
 	

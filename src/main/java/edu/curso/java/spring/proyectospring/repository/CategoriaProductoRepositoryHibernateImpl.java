@@ -26,4 +26,10 @@ public class CategoriaProductoRepositoryHibernateImpl implements CategoriaProduc
 		return entityManager.createQuery("from CategoriaProducto as c order by c.nombre").getResultList();
 	}
 
+	@Override
+	public Long guardarNuevaCategoria(CategoriaProducto categoriaProducto) {
+		entityManager.persist(categoriaProducto);
+		return categoriaProducto.getId();
+	}
+
 }

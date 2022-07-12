@@ -7,6 +7,6 @@ public interface CategoriaProductoRepository {
 
 	public CategoriaProducto buscarCategoriaProductoPorId(Long id);
 	public List<CategoriaProducto> recuperarTodasLasCategoriasProducto();
-	
+	public Long guardarNuevaCategoria(CategoriaProducto categoriaProducto);
 	
 }

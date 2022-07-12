@@ -29,5 +29,7 @@ public interface ProductoService {
 
 	List<Producto> recuperarProductosPorCategoria(Long id);
 	
+	Long guardarNuevaCategoria(CategoriaProducto categoriaProducto);
+	
 
 }
