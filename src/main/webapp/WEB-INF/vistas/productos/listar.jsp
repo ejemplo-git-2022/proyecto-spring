@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -45,8 +46,12 @@
 			</td>
 			<td>
 				<a href="/productos/${p.id}" class="btn btn-primary">Ver</a>&nbsp;
-				<a href="/productos/${p.id}/editar" class="btn btn-success">Editar</a>&nbsp;
-				<a href="/productos/${p.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a></td>
+				<sec:authorize access="hasRole('ADMIN')">
+					<a href="/productos/${p.id}/editar" class="btn btn-success">Editar</a>&nbsp;
+					<a href="/productos/${p.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a>
+				</sec:authorize>
+			</td>
+				
 		</tr>
 	</c:forEach>
 </table>
