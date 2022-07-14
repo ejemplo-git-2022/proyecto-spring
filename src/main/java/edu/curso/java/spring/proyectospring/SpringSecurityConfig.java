@@ -43,7 +43,11 @@ public class SpringSecurityConfig {
 				form.loginPage("/login");
 				form.loginProcessingUrl("/validarusuario");
 				form.failureUrl("/login?error=true");
-			}).httpBasic().and().csrf().disable();
+				form.defaultSuccessUrl("/productos");
+			}).httpBasic().and().csrf().disable()
+			.logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID");
 
 		return http.build();
 	}
