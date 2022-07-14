@@ -73,7 +73,7 @@
 		        </li>
 		        
 		        <li class="nav-item">
-		          <a class="nav-link" href="<c:url value="/logout"/>">Cerrar session de <sec:authentication property="principal.username" /> </a>
+		          <a class="nav-link" href="<c:url value="/logout"/>">Cerrar session de <sec:authentication property="principal.username" /> - <sec:authentication property="principal" /> </a>
 		        </li>
 		        
 		      </ul>
